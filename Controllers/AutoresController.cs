@@ -12,9 +12,8 @@ namespace ProyectoClase.Controllers
 
         public AutoresController(LibreriaContext context)
         {
-            _context = _context;
+            _context = context;
         }
-
         public async Task<IActionResult> ListadoAutores()
         {
             return View(await _context.Autores.ToListAsync());

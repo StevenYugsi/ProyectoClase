@@ -12,7 +12,7 @@ namespace ProyectoClase.Controllers
 
         public CategoriaController(LibreriaContext context)
         {
-            _context = _context;
+            _context = context;
         }
         public async Task<IActionResult> ListadoCategoria()
         {

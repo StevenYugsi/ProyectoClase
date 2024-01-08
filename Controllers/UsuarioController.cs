@@ -10,9 +10,9 @@ namespace ProyectoClase.Controllers
     {
         private readonly LibreriaContext _context;
 
-        public UsuarioController(LibreriaContext _context)
+        public UsuarioController(LibreriaContext context)
         {
-            _context = _context;
+            _context = context;
         }
         public async Task<IActionResult> ListadoUsuarios()
         {
