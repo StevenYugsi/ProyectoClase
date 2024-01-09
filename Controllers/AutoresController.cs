@@ -22,6 +22,7 @@ namespace ProyectoClase.Controllers
         {
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> Crear(Autor autor)
         {
             if (ModelState.IsValid)
@@ -29,7 +30,7 @@ namespace ProyectoClase.Controllers
                 _context.Add(autor);
                 await _context.SaveChangesAsync();
                 TempData["AlertMessage"] = "Autor Creado Exitosamente";
-                return RedirectToAction("ListaAutores");
+                return RedirectToAction("ListadoAutores");
             }
             else
             {

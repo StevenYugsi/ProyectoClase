@@ -1,6 +1,6 @@
 ﻿showInPopup = (url, title) => {
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
         success: function (res) {
             $('#form-modal .modal-body').html(res);
