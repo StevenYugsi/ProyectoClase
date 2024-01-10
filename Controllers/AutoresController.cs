@@ -38,19 +38,20 @@ namespace ProyectoClase.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> Editar(int? id)
         {
             if (id == null || _context.Autores == null)
             {
                 return NotFound();
             }
-            var autor = await _context.Autores.FirstOrDefaultAsync(n => n.IdAutor == id);
+
+            var autor = await _context.Autores.FindAsync(id);
             if (autor == null)
             {
                 return NotFound();
             }
-            return View (autor);
-
+            return View(autor);
         }
 
         [HttpPost]
@@ -60,21 +61,22 @@ namespace ProyectoClase.Controllers
             {
                 return NotFound();
             }
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(autor);
                     await _context.SaveChangesAsync();
-                    TempData["AlertMessage"] = "Autor Actualizado Correctamente!!! ";
+                    TempData["AlertMessage"] = "Autor actualizado " +
+                        "exitosamente!!!";
                     return RedirectToAction("ListadoAutores");
-
-
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError(ex.Message, "Ocurrio un error al Actualizar");
 
+                    ModelState.AddModelError(ex.Message, "Ocurrio un error " +
+                        "al actualizar");
                 }
             }
             return View(autor);
