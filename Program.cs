@@ -4,8 +4,7 @@ using ProyectoClase.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+// Add services to the container
 builder.Services.AddDbContext<LibreriaContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -15,7 +14,9 @@ builder.Services.AddScoped<IServicioLista, ServicioLista>();
 builder.Services.AddScoped<IServicioUsuario, ServicioUsuario>();
 builder.Services.AddScoped<IServicioAutores, ServicioAutores>();
 builder.Services.AddScoped<IServicioCategoria, ServicioCategoria>();
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
