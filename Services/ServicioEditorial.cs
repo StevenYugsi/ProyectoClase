@@ -12,15 +12,15 @@ namespace ProyectoClase.Services
         {
             _context = context;
         }
-        public async Task<Editorial> GetEditorial(string NombreEdictorial)
+        public async Task<Editorial> GetEditorial(string NombreEditorial)
         {
-            Editorial editorial = await _context.editoriales.Where(u => u.NombreEdictorial == NombreEdictorial).FirstOrDefaultAsync();
+            Editorial editorial = await _context.editoriales.Where(u => u.NombreEditorial == NombreEditorial).FirstOrDefaultAsync();
             return editorial;
         }
 
         public async Task<Editorial> GetEditoriales(string editoriales)
         {
-            return await _context.editoriales.FirstOrDefaultAsync(u => u.NombreEdictorial == editoriales);
+            return await _context.editoriales.FirstOrDefaultAsync(u => u.NombreEditorial == editoriales);
         }
 
         public async Task<Editorial> SaveEditorial(Editorial editorial)

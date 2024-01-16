@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProyectoClase.Migrations;
 using ProyectoClase.Models;
 using ProyectoClase.Models.Entidades;
 

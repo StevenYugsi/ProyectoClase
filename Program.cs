@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoClase.Models;
 using ProyectoClase.Services;
 
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
 // Add services to the container
 builder.Services.AddDbContext<LibreriaContext>(o =>
 {
@@ -14,7 +17,24 @@ builder.Services.AddScoped<IServicioLista, ServicioLista>();
 builder.Services.AddScoped<IServicioUsuario, ServicioUsuario>();
 builder.Services.AddScoped<IServicioAutores, ServicioAutores>();
 builder.Services.AddScoped<IServicioCategoria, ServicioCategoria>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IServicioImagen, ServicioImagen>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login/IniciarSesion";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
+builder.Services.AddControllersWithViews(options =>
+    {
+        options.Filters.Add(
+            new ResponseCacheAttribute
+            {
+                NoStore = true,
+                Location = ResponseCacheLocation.None,
+            });
+    });
+
 var app = builder.Build();
 
 
@@ -30,11 +50,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=IniciarSesion}/{id?}");
 
 app.Run();

@@ -12,7 +12,7 @@ using ProyectoClase.Models;
 namespace ProyectoClase.Migrations
 {
     [DbContext(typeof(LibreriaContext))]
-    [Migration("20240104150618_Librerie")]
+    [Migration("20240116020618_Librerie")]
     partial class Librerie
     {
         /// <inheritdoc />
@@ -107,7 +107,7 @@ namespace ProyectoClase.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEditorial"));
 
-                    b.Property<string>("NombreEdictorial")
+                    b.Property<string>("NombreEditorial")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -198,10 +198,6 @@ namespace ProyectoClase.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
-                    b.Property<string>("Cedula")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Contraseña")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -210,23 +206,14 @@ namespace ProyectoClase.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreUsuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefono")
-                        .IsRequired()
+                    b.Property<string>("URLFotoPerfil")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("idRol")
-                        .HasColumnType("int");
-
-                    b.Property<int>("rolesIdRol")
-                        .HasColumnType("int");
 
                     b.HasKey("IdUsuario");
-
-                    b.HasIndex("rolesIdRol");
 
                     b.ToTable("usuarios");
                 });
@@ -308,17 +295,6 @@ namespace ProyectoClase.Migrations
                     b.Navigation("categoria");
 
                     b.Navigation("editorial");
-                });
-
-            modelBuilder.Entity("ProyectoClase.Models.Entidades.Usuario", b =>
-                {
-                    b.HasOne("ProyectoClase.Models.Entidades.Roles", "roles")
-                        .WithMany()
-                        .HasForeignKey("rolesIdRol")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("roles");
                 });
 
             modelBuilder.Entity("ProyectoClase.Models.Entidades.Ventas", b =>

@@ -21,7 +21,7 @@ namespace ProyectoClase.Services
 
         public async Task<Usuario> GetUsuario(string nombreUsuario)
         {
-            return await _context.usuarios.FirstOrDefaultAsync(u => u.Nombre == nombreUsuario);
+            return await _context.usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario);
         }
 
         public async Task<Usuario> SaveUsuario(Usuario usuario)

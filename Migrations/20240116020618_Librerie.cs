@@ -45,7 +45,7 @@ namespace ProyectoClase.Migrations
                 {
                     IdEditorial = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreEdictorial = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NombreEditorial = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,6 +63,22 @@ namespace ProyectoClase.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_roles", x => x.IdRol);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "usuarios",
+                columns: table => new
+                {
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    URLFotoPerfil = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_usuarios", x => x.IdUsuario);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,31 +120,6 @@ namespace ProyectoClase.Migrations
                         column: x => x.editorialIdEditorial,
                         principalTable: "editoriales",
                         principalColumn: "IdEditorial",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "usuarios",
-                columns: table => new
-                {
-                    IdUsuario = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cedula = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    idRol = table.Column<int>(type: "int", nullable: false),
-                    rolesIdRol = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_usuarios", x => x.IdUsuario);
-                    table.ForeignKey(
-                        name: "FK_usuarios_roles_rolesIdRol",
-                        column: x => x.rolesIdRol,
-                        principalTable: "roles",
-                        principalColumn: "IdRol",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -211,11 +202,6 @@ namespace ProyectoClase.Migrations
                 column: "editorialIdEditorial");
 
             migrationBuilder.CreateIndex(
-                name: "IX_usuarios_rolesIdRol",
-                table: "usuarios",
-                column: "rolesIdRol");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ventas_usuarioIdUsuario",
                 table: "ventas",
                 column: "usuarioIdUsuario");
@@ -226,6 +212,9 @@ namespace ProyectoClase.Migrations
         {
             migrationBuilder.DropTable(
                 name: "detalleVentas");
+
+            migrationBuilder.DropTable(
+                name: "roles");
 
             migrationBuilder.DropTable(
                 name: "libros");
@@ -244,9 +233,6 @@ namespace ProyectoClase.Migrations
 
             migrationBuilder.DropTable(
                 name: "usuarios");
-
-            migrationBuilder.DropTable(
-                name: "roles");
         }
     }
 }

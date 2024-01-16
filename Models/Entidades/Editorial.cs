@@ -8,7 +8,7 @@ namespace ProyectoClase.Models.Entidades
         [Key]
         public int IdEditorial { get; set; }
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public string NombreEdictorial { get; set; }
+        public string NombreEditorial { get; set; }
 
     }
 }
