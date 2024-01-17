@@ -31,12 +31,17 @@ namespace ProyectoClase.Controllers
         }
         public async Task<IActionResult> Crear()
         {
-            Libro libro = new Libro()
+            Libro libro = await GetLibro();
+            return View(libro);
+        }
+
+        private async Task<Libro> GetLibro()
+        {
+            return new Libro()
             {
                 Categorias = await _servicioLista.GetListaCategorias(),
                 Autores = await _servicioLista.GetListaAutores()
             };
-            return View(libro);
         }
 
         [HttpPost]

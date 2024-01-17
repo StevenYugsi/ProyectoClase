@@ -1,0 +1,100 @@
+﻿
+@model IEnumerable<ProyectoClase.Models.Entidades.Libro>
+@{
+    ViewData["Title"] = "ListadoLibro";
+}
+@if (TempData["AlertMessage"] != null)
+{
+
+<div class="alert alert-success">
+    <strong>Ok!!-----</strong>@TempData["AlertMessage"]
+</div>
+}
+<p>
+    <a onclick="showInPopup('@Url.Action("Crear", "Libros",
+    new { id = 0 }, Context.Request.Scheme)' ,
+    '')" class="btn btn-sm btn-primary text-white">
+        <i class="fa fa-plus-circle"></i> Agregar un Libro
+    </a>
+</p>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header text-center">
+            <h5>Listado de Libros</h5>
+        </div>
+        <div class=" card-body">
+            <table id="libro" class="table table-hover table responsive table striped ">
+                <thead>
+                    <tr>
+                        <th scope="#"></th>
+                        <th scope="Titulo"></th>
+                        <th scope="Año"></th>
+                        <th scope="Precio"></th>
+                        <th scope="URLLibro"></th>
+                        <th scope="Estado"></th>
+                        <th scope="Categoria"></th>
+                        <th scope="Editorial"></th>                    
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.IdLibro</th>
+                            <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Año)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaRegitro)</td>
+                            <td>@Html.DisplayFor(modelItem => item.URLLibro)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                            <td>@Html.DisplayFor(modelItem => item.idCategoria)</td>
+                            <td>@Html.DisplayFor(modelItem => item.idAutor)</td>
+                            <td>@Html.DisplayFor(modelItem => item.idEditorial)</td>
+                            <td>
+                                <a onclick="showInPopup('@Url.Action("Editar", "Autores",
+                                new { id = item.IdLibro }, Context.Request.Scheme)' ,
+                                  'Actualizar Autor')" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-pencil-alt"></i>Editar
+                                </a>
+                                <button data-id="@item.IdLibro"
+                                        class="btn btn-danger btn-sm deleteItem"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteDialog">
+                                    <i class="fa fa-trash"></i>Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<partial name="_MostrarModal" />
+<partial name="_ModalEliminar" />
+
+@section Scripts {
+
+    <script src="~/js/showmodal.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#libro').DataTable(
+                {
+                    "language": {
+                        url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+                    },
+                });
+        });
+    </script>
+
+    <script>
+        sc_deleteDialog.openModal('deleteItem', true, 'btnYesDelete', '/Libros/Eliminar/', false);
+    </script>
+}
+
+

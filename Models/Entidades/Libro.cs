@@ -13,6 +13,7 @@ namespace ProyectoClase.Models.Entidades
         public string Titulo { get; set; }
         public int Año { get; set; }
         public decimal Precio { get; set; }
+
         public DateTime FechaRegitro { get; set; }
         public string URLLibro { get; set; }
         public bool Estado { get; set; }

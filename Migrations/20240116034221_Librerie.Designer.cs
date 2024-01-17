@@ -12,7 +12,7 @@ using ProyectoClase.Models;
 namespace ProyectoClase.Migrations
 {
     [DbContext(typeof(LibreriaContext))]
-    [Migration("20240116020618_Librerie")]
+    [Migration("20240116034221_Librerie")]
     partial class Librerie
     {
         /// <inheritdoc />

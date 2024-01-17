@@ -1,0 +1,121 @@
+﻿@model ProyectoClase.Models.Entidades.Libro
+@{
+    ViewData["title"] = "CrearLibro";
+    Layout = null;
+}
+<div class=" col-md-12">
+    <div class=" card">
+        <div class=" card-header text-center">
+            <h5> Crear Autor</h5>
+        </div>
+        <div class=" card-body text-center">
+            <form asp-action="Crear">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label></label>
+                    <input asp-for="Titulo" class="form-control" placeholder=" Titulo" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Año</label>
+                    <select asp-for="Año" class="form-control">
+                        <option value="">Selecciona un año</option>
+                        @for (int i = 1900; i <= DateTime.Now.Year; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Año" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Precio</label>
+                    <input asp-for="Precio" class="form-control" type="number" placeholder="Precio" />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Registro</label>
+                    <input asp-for="FechaRegitro" class="form-control" type="text" placeholder="Fecha de Registro" readonly value="@DateTime.Now.ToString("dd-MM-yyyy")" />
+                    <span asp-validation-for="FechaRegitro" class="text-danger"></span>
+                </div>
+
+                <input type="file" class="form-control mb-3" name="Imagen" required>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select asp-for="Estado" class="form-control">
+                        <option value="true">Activo</option>
+                        <option value="false">Desactivado</option>
+                    </select>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="idCategoria" name="idCategoria" class="form-control">
+                        <option value="">Selecciona una categoría</option>
+                    </select>
+                    <span asp-validation-for="idCategoria" class="text-danger"></span>
+                </div>
+                <!-- Para idAutor -->
+                <div class="form-group">
+                    <label>Autor</label>
+                    <select id="idAutor" name="idAutor" class="form-control">
+                        <option value="">Selecciona un autor</option>
+                    </select>
+                    <span asp-validation-for="idAutor" class="text-danger"></span>
+                </div>
+
+                <!-- Para idEditorial -->
+                <div class="form-group">
+                    <label>Editorial</label>
+                    <select id="idEditorial" name="idEditorial" class="form-control">
+                        <option value="">Selecciona una editorial</option>
+                    </select>
+                    <span asp-validation-for="idEditorial" class="text-danger"></span>
+                </div>
+                <div class=" card-footer ">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Guardar</button>
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"><i class="fa fa-ban"></i> Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Tu código HTML anterior -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Categoria/ObtenerCategorias',
+            type: 'GET',
+            success: function (data) {
+                // Limpiar el select antes de agregar nuevas opciones
+                $('#IdCategoria ').empty();
+
+                // Agregar la opción predeterminada
+                $('#IdCategoria ').append($('<option>', {
+                    value: '',
+                    text: 'Selecciona una categoría'
+                }));
+
+                // Llenar el select con las opciones de categorías
+                for (var i = 0; i < data.length; i++) {
+                    $('#IdCategoria ').append($('<option>', {
+                        value: data[i].idCategoria,
+                        text: data[i].nombre
+                    }));
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+    // Obtener la fecha actual en formato YYYY-MM-DD
+    var fechaActual = new Date().toISOString().split('T')[0];
+
+    // Establecer el atributo max del campo de entrada date
+    document.getElementById('fechaRegistro').setAttribute('max', fechaActual);
+</script>
