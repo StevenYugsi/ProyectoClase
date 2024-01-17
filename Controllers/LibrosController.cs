@@ -42,7 +42,6 @@ namespace ProyectoClase.Controllers
                 Categorias = await _servicioLista.GetListaCategorias(),
                 Autores = await _servicioLista.GetListaAutores(),
                 Editoriales = await _servicioLista.GetListaeditoriales()
-
             };
         }
 

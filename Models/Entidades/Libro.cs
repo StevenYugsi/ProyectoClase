@@ -30,6 +30,5 @@ namespace ProyectoClase.Models.Entidades
         public IEnumerable<SelectListItem> Autores { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem> Editoriales { get; set; }
-
     }
 }
