@@ -40,7 +40,9 @@ namespace ProyectoClase.Controllers
             return new Libro()
             {
                 Categorias = await _servicioLista.GetListaCategorias(),
-                Autores = await _servicioLista.GetListaAutores()
+                Autores = await _servicioLista.GetListaAutores(),
+                Editoriales = await _servicioLista.GetListaeditoriales()
+
             };
         }
 

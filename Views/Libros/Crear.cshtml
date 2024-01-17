@@ -47,21 +47,19 @@
                     </select>
                     <span asp-validation-for="Estado" class="text-danger"></span>
                 </div>
-
                 <div class="form-group">
-                    <label>Categoría</label>
-                    <select id="idCategoria" name="idCategoria" class="form-control">
-                        <option value="">Selecciona una categoría</option>
+                    <label class="form-label" asp-for="idCategoria">Categoria</label>
+                    <select class="form-select form-select-sm" asp-for="idCategoria"asp-items="@Model.Categorias" >
+                        <option selected disabled> --Seleccionar--</option>
                     </select>
-                    <span asp-validation-for="idCategoria" class="text-danger"></span>
                 </div>
+                
                 <!-- Para idAutor -->
                 <div class="form-group">
-                    <label>Autor</label>
-                    <select id="idAutor" name="idAutor" class="form-control">
-                        <option value="">Selecciona un autor</option>
+                    <label class="form-label" asp-for="idAutor">Autor</label>
+                    <select class="form-select form-select-sm" asp-for="idAutor" asp-items="@Model.Autores">
+                        <option selected disabled> --Seleccionar--</option>
                     </select>
-                    <span asp-validation-for="idAutor" class="text-danger"></span>
                 </div>
 
                 <!-- Para idEditorial -->

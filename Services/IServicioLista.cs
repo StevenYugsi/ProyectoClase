@@ -8,6 +8,6 @@ namespace ProyectoClase.Services
             GetListaAutores();
         Task<IEnumerable<SelectListItem>>
             GetListaCategorias();
-
+        Task<IEnumerable<SelectListItem>> GetListaeditoriales();
     }
 }
