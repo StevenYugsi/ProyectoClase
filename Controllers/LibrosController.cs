@@ -41,7 +41,7 @@ namespace ProyectoClase.Controllers
             {
                 Categorias = await _servicioLista.GetListaCategorias(),
                 Autores = await _servicioLista.GetListaAutores(),
-                Editoriales = await _servicioLista.GetListaeditoriales()
+                Editoriales = await _servicioLista.GetListaEditoriales()
             };
         }
 
@@ -65,6 +65,7 @@ namespace ProyectoClase.Controllers
             }
             libro.Categorias = await _servicioLista.GetListaCategorias();
             libro.Autores = await _servicioLista.GetListaAutores();
+            libro.Editoriales = await _servicioLista.GetListaEditoriales();
             return View(libro);
         }
         public async Task<IActionResult> Editar(int? id)

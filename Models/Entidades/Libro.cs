@@ -23,11 +23,14 @@ namespace ProyectoClase.Models.Entidades
         public Autor autor { get; set; }
         public Editorial editorial { get; set; }
         public Categoria categoria { get; set; }
+        
 
         [NotMapped]
         public IEnumerable<SelectListItem> Categorias { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem> Autores { get; set; }
+
+
         [NotMapped]
         public IEnumerable<SelectListItem> Editoriales { get; set; }
     }

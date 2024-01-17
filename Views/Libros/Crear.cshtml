@@ -39,6 +39,7 @@
                 </div>
 
                 <input type="file" class="form-control mb-3" name="Imagen" required>
+
                 <div class="form-group">
                     <label>Estado</label>
                     <select asp-for="Estado" class="form-control">
@@ -55,20 +56,19 @@
                 </div>
                 
                 <!-- Para idAutor -->
+
                 <div class="form-group">
                     <label class="form-label" asp-for="idAutor">Autor</label>
                     <select class="form-select form-select-sm" asp-for="idAutor" asp-items="@Model.Autores">
                         <option selected disabled> --Seleccionar--</option>
                     </select>
                 </div>
-
                 <!-- Para idEditorial -->
                 <div class="form-group">
-                    <label>Editorial</label>
-                    <select id="idEditorial" name="idEditorial" class="form-control">
-                        <option value="">Selecciona una editorial</option>
+                    <label class="form-label" asp-for="idEditorial">Editorial</label>
+                    <select class="form-select form-select-sm" asp-for="idEditorial" asp-items="@Model.Editoriales">
+                        <option selected disabled> --Seleccionar--</option>
                     </select>
-                    <span asp-validation-for="idEditorial" class="text-danger"></span>
                 </div>
                 <div class=" card-footer ">
                     <div class="form-group">
